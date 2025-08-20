@@ -1,0 +1,44 @@
+
+project_id = "fmslwsxawesophtbfzsz"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+
+[db]
+port = 54322
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://localhost"
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+
+[analytics]
+enabled = false
+
+[realtime]
+enabled = true
+
+[[functions]]
+name = "analyze-pill"
+verify_jwt = true
+
+[[functions]]
+name = "analyze-symptoms"
+verify_jwt = true
+
+[[functions]]
+name = "health-check"
+verify_jwt = false

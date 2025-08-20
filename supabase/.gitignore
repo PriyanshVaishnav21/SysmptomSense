@@ -1,0 +1,17 @@
+# Node/Vite
+node_modules
+dist
+*.log
+
+# IDE
+.vscode
+.DS_Store
+
+# Docker
+.dockerignore
+
+# Keep .env tracked per your request (do NOT list .env here)
+# Ignore infra folders you don’t want in Git
+.env
+kubernetes-manifest/
+results/

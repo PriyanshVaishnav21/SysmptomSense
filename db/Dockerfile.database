@@ -1,0 +1,6 @@
+FROM mongo:6
+
+# Expose default MongoDB port
+EXPOSE 27017
+
+CMD ["mongod", "--bind_ip_all"]

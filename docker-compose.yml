@@ -1,0 +1,47 @@
+services:
+  symptonSense_database:
+    build:
+      context: ./db
+      dockerfile: Dockerfile.database
+    image: symptomsense_database
+    container_name: symptonSense_database
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  symptomSense_backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: symptomsense_backend
+    container_name: symptomSense_backend
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://symptonSense_database:27017/symptom_sense_ai
+      - PORT=${PORT:-4000}
+      - CORS_ORIGIN={CORS_ORIGIN}
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - symptonSense_database
+    ports:
+      - "${PORT:-4000}:${PORT:-4000}"
+
+  symptomSense_frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:4000}
+    image: symptomsense_frontend
+    container_name: symptomSense_frontend
+    restart: unless-stopped
+    depends_on:
+      - symptomSense_backend
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo_data:

@@ -1,0 +1,12 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: symptom-sense-service
+spec:
+  selector:
+    app: symptom-sense
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: symptom-sense-config
+data:
+  ENVIRONMENT: "production"
+  API_URL: "https://fmslwsxawesophtbfzsz.supabase.co/functions/v1"

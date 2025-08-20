@@ -19,11 +19,11 @@ services:
     container_name: symptomSense_backend
     restart: unless-stopped
     environment:
-      - MONGODB_URI=mongodb://symptonSense_database:27017/symptom_sense_ai
-      - PORT=${PORT:-4000}
-      - CORS_ORIGIN={CORS_ORIGIN}
-      - JWT_SECRET=${JWT_SECRET}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://symptonSense_database:27017/symptom_sense_ai}
+      PORT: ${PORT:-4000}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      JWT_SECRET: ${JWT_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
       - symptonSense_database
     ports:

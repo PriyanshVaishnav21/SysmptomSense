@@ -1,0 +1,25 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: symptom-sense-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: symptom-sense.example.com  # Replace with your actual domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: symptom-sense-service
+            port:
+              number: 80
+  # Uncomment and configure if you have TLS certificates
+  # tls:
+  # - hosts:
+  #   - symptom-sense.example.com
+  #   secretName: symptom-sense-tls-secret

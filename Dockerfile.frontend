@@ -2,10 +2,6 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Inject API base at build time so the SPA points to the backend
-ARG VITE_API_URL=http://localhost:4000
-ENV VITE_API_URL=${VITE_API_URL}
-
 COPY package.json package-lock.json* bun.lockb* ./
 RUN npm ci || npm install
 

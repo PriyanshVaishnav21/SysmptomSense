@@ -19,7 +19,7 @@ cd server
 npm install
 npm run start
 ```
-- Health check: http://localhost:4000/api/health
+- Health check: http://localhost:4000/api/health route
 
 2) Frontend (Vite)
 - Create `.env` at repo root:

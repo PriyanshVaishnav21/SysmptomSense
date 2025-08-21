@@ -1,0 +1,36 @@
+name: Run Docker Compose with Secrets
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  run-compose:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: take teh code from the repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2 : Create the env file at run time
+      - name: Create .env file
+        run: |
+          echo "MONGODB_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "JWT_TOKEN=${{ secrets.JWT_TOKEN }}" >> .env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}" >> .env
+          
+      
+      # Step 3: run the docker compose file
+      - name: Run Docker Compose
+        run: docker-compose up -d -build
+
+      # Step 4: Run the Integration tests
+      - name: Run Integration Tests
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15 
+          
